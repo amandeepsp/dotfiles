@@ -1,8 +1,8 @@
 return {
-  "NeogitOrg/neogit",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-telescope/telescope.nvim",
-  },
-  config = true
+  { 
+    "lewis6991/gitsigns.nvim",
+    config = function ()
+      require('gitsigns').setup()
+    end
+  }
 }
