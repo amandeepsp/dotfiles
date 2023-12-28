@@ -4,7 +4,7 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme "kanagawa-dragon"
+      vim.cmd.colorscheme("kanagawa-dragon")
     end,
   },
   {
@@ -13,6 +13,6 @@ return {
     priority = 1000,
     config = function()
       -- vim.cmd.colorscheme "tokyonight-storm"
-    end
-  }
+    end,
+  },
 }
