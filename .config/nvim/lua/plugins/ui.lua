@@ -6,7 +6,17 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
     config = function()
-      require("nvim-tree").setup()
+      require("nvim-tree").setup({
+        hijack_cursor = true,
+        renderer = {
+          icons = {
+            git_placement = "signcolumn",
+          },
+        },
+        filters = {
+          custom = { "^.git$" },
+        },
+      })
     end,
   },
   {
