@@ -1,6 +1,8 @@
 local formatters_by_filetype = {
   python = { "ruff_format", "ruff_fix" },
   lua = { "stylua" },
+  sh = { "shfmt" },
+  zsh = { "shfmt" },
 }
 return {
   "stevearc/conform.nvim",

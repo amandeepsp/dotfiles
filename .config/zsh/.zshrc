@@ -1,18 +1,11 @@
+#!/bin/zsh
 
-export ZSH="$HOME/.oh-my-zsh"
+# Zsh Config is based on https://github.com/marlonrichert/zsh-launchpad/
 
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-export LANG=en_US.UTF-8
-
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR="vim"
-else
-    export EDITOR="nvim"
-fi
-
+() {
+  # Load all of the files in rc.d that start with <number>- and end in `.zsh`.
+  local file=
+  for file in $ZDOTDIR/rc.d/<->-*.zsh(n); do
+    . $file   # `.` is like `source`, but doesn't search your $path.
+  done
+} "$@"

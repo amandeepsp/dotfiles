@@ -1,1 +1,3 @@
 *.log
+*.zwc
+.config/tmux/plugins
