@@ -24,6 +24,7 @@ return {
       group = vim.api.nvim_create_augroup("linting", { clear = true }),
       callback = debounce(100, function()
         linter.try_lint()
+        linter.try_lint("cspell")
       end),
     })
   end,

@@ -3,6 +3,8 @@ local formatters_by_filetype = {
   lua = { "stylua" },
   sh = { "shfmt" },
   zsh = { "shfmt" },
+  javascript = { "prettier" },
+  typescript = { "prettier" },
 }
 return {
   "stevearc/conform.nvim",

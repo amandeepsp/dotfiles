@@ -22,6 +22,10 @@ vim.opt.pumheight = 10 -- Maximum number of entries in a popup
 vim.opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 vim.opt.undofile = true
 vim.opt.undolevels = 10000
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 if vim.fn.has("nvim-0.10") == 1 then
   vim.opt.smoothscroll = true

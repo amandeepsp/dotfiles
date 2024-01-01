@@ -16,6 +16,15 @@ return {
         filters = {
           custom = { "^.git$" },
         },
+        diagnostics = {
+          enable = true,
+        },
+        actions = {
+          open_file = {
+            quit_on_open = true,
+            eject = false,
+          },
+        },
       })
     end,
   },
@@ -46,6 +55,12 @@ return {
           },
         },
       })
+    end,
+  },
+  {
+    "j-hui/fidget.nvim",
+    config = function()
+      require("fidget").setup()
     end,
   },
 }

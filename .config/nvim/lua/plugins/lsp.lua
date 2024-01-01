@@ -11,6 +11,8 @@ local servers = {
     },
   },
   pyright,
+  tsserver,
+  eslint_lsp,
 }
 
 local function on_lsp_attach(_, bufnr)
