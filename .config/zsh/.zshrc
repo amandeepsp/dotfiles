@@ -9,3 +9,4 @@
     . $file   # `.` is like `source`, but doesn't search your $path.
   done
 } "$@"
+

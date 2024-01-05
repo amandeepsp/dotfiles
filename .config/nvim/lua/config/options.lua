@@ -28,7 +28,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 if vim.fn.has("nvim-0.10") == 1 then
-  vim.opt.smoothscroll = true
+    vim.opt.smoothscroll = true
 end
 
 -- disable netrw

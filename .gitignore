@@ -1,3 +1,6 @@
 *.log
 *.zwc
 .config/tmux/plugins
+.iterm2*
+.zsh_sessions
+*work*
