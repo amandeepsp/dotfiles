@@ -50,6 +50,12 @@ alias -s {log,out}='tail -F'
 # Use `< file` to quickly view the contents of any text file.
 READNULLCMD=$PAGER # Set the program to use for this.
 
-alias ls='ls --color=auto'
-alias ll='ls -al --color=auto'
+if [[ $(uname) == "Darwin" ]]; then
+	test -e ~/.fzf.zsh && source ~/.fzf.zsh
+	test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
+fi
 
+alias ls='exa'
+alias ll='ls -al'
+alias vim='nvim'
+alias cat='bat'

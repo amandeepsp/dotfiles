@@ -8,6 +8,13 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
     command = "checktime",
 })
 
+-- Remove trailing whitespace on save
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    group = augroup("remove_trailing_whitespace"),
+    pattern = "*",
+    command = "%s/\\s\\+$//e",
+})
+
 -- Highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = augroup("highlight_yank"),

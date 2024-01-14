@@ -23,6 +23,7 @@ local function setup_completion()
                 behavior = cmp.ConfirmBehavior.Replace,
                 select = true,
             }),
+            ["<C-e>"] = cmp.mapping.abort(),
             ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()

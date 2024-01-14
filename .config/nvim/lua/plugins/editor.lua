@@ -1,17 +1,30 @@
 return {
-    "tpope/vim-sleuth",
+    { "tpope/vim-sleuth" },
     {
         "echasnovski/mini.pairs",
         event = "VeryLazy",
-        config = function()
-            require("mini.pairs").setup()
+        opts = {
+            mappings = {
+                ["'"] = false,
+                ['"'] = false,
+            },
+        },
+        config = function(opts)
+            require("mini.pairs").setup(opts)
         end,
     },
     {
         "echasnovski/mini.surround",
-        version = "*",
+        event = "VeryLazy",
         config = function()
             require("mini.surround").setup()
+        end,
+    },
+    {
+        "echasnovski/mini.comment",
+        event = "VeryLazy",
+        config = function()
+            require("mini.comment").setup()
         end,
     },
     {
@@ -34,49 +47,42 @@ return {
         },
     },
     {
-        "echasnovski/mini.hipatterns",
-        version = "*",
+        -- Test highlighting
+        -- PERF: test perf?
+        -- HACK: bruh
+        -- TODO: wew
+        -- NOTE:  sdkfj dkfjskdfj
+        -- FIX: fixed
+        -- WARNING: test done
+        "folke/todo-comments.nvim",
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
-            local hipatterns = require("mini.hipatterns")
-            hipatterns.setup({
-                highlighters = {
-                    -- Highlight "FIXME", "HACK", "TODO", "NOTE"
-                    fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
-                    hack = { pattern = "%f[%w]()HACK()%f[%W]", group = "MiniHipatternsHack" },
-                    todo = { pattern = "%f[%w]()TODO()%f[%W]", group = "MiniHipatternsTodo" },
-                    note = { pattern = "%f[%w]()NOTE()%f[%W]", group = "MiniHipatternsNote" },
-                    hex_color = hipatterns.gen_highlighter.hex_color(),
-                },
-            })
-        end,
-    },
-    {
-        "echasnovski/mini.trailspace",
-        version = "*",
-        config = function()
-            require("mini.trailspace").setup()
+            require("todo-comments").setup()
         end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
         main = "ibl",
         config = function()
+            -- Don't show lines on the first indent level
+            local hooks, builtin = require("ibl.hooks"), require("ibl.hooks").builtin
+            hooks.register(hooks.type.WHITESPACE, builtin.hide_first_space_indent_level)
+            hooks.register(hooks.type.WHITESPACE, builtin.hide_first_tab_indent_level)
+
             require("ibl").setup({
                 indent = { char = "▏" },
-                scope = { enabled = true },
+                scope = {
+                    enabled = true,
+                },
                 exclude = {
                     filetypes = {
                         "help",
-                        "alpha",
-                        "dashboard",
-                        "neo-tree",
                         "Trouble",
                         "trouble",
                         "lazy",
                         "mason",
                         "notify",
-                        "toggleterm",
-                        "lazyterm",
                     },
                 },
             })
