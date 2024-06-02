@@ -43,24 +43,6 @@ return {
         end,
     },
     {
-        "akinsho/bufferline.nvim",
-        event = "BufReadPre",
-        version = "*",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            require("bufferline").setup({
-                options = {
-                    offsets = {
-                        {
-                            filetype = "NvimTree",
-                            separator = true,
-                        },
-                    },
-                },
-            })
-        end,
-    },
-    {
         "j-hui/fidget.nvim",
         config = function()
             require("fidget").setup()
