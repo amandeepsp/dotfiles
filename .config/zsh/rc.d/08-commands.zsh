@@ -56,6 +56,5 @@ if [[ $(uname) == "Darwin" ]]; then
 fi
 
 alias ls='exa'
-alias ll='ls -al'
+alias ll='ls -alh'
 alias vim='nvim'
-alias cat='bat'

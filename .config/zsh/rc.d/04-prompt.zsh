@@ -8,8 +8,10 @@ autoload colors && colors
 
 # Reduce startup time by making the left side of the primary prompt visible
 # *immediately.*
-znap prompt launchpad
 
-# `znap prompt` can autoload our prompt function, because in 04-env.zsh, we
-# added its parent dir to our $fpath.
-
+if command -v starship > /dev/null; then
+    znap eval starship 'starship init zsh --print-full-init';
+    znap prompt
+else
+    echo "starship not installed";
+fi
