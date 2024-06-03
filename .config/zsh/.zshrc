@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+zmodload zsh/zprof
 # Zsh Config is based on https://github.com/marlonrichert/zsh-launchpad/
 
 () {
