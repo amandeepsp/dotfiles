@@ -38,4 +38,4 @@ load_jenv() {
     fi
 }
 
-lazyload jenv java -- load_jenv
+lazyload jenv java mvn -- load_jenv

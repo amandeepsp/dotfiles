@@ -10,7 +10,6 @@ local -a plugins=(
 	zsh-users/zsh-syntax-highlighting # Command-line syntax highlighting
 	marlonrichert/zsh-autocomplete    # Real-time type-ahead completion
 	marlonrichert/zsh-edit            # Better keyboard shortcuts
-	marlonrichert/zsh-hist            # Edit history from the command line.
 	marlonrichert/zcolors             # Colors for completions and Git
 	qoomon/zsh-lazyload			      # Load scripts on demand
 )
