@@ -3,9 +3,12 @@ local action = wezterm.action
 
 local config = wezterm.config_builder()
 
-config.font = wezterm.font("SF Mono")
+-- `front_end` setinng can make font rendering
+-- a little bit better on macOS
+config.front_end = "WebGpu"
 config.font_size = 13.0
 config.scrollback_lines = 10000
+config.color_scheme = "kanagawabones"
 
 config.window_padding = {
     left = 0,
@@ -16,7 +19,7 @@ config.window_padding = {
 
 config.use_fancy_tab_bar = false
 config.inactive_pane_hsb = {
-    saturation = 0.5,
+    saturation = 0.9,
     brightness = 0.5,
 }
 
@@ -67,27 +70,14 @@ wezterm.on("update-right-status", function(window, pane)
         table.insert(cells, string.format("%.0f%%", b.state_of_charge * 100))
     end
 
-    local colors = {
-        "#3c1361",
-        "#52307c",
-        "#663a82",
-        "#7c5295",
-        "#b491c8",
-    }
-
     local text_fg = "#c0c0c0"
 
     local elements = {}
     local num_cells = 0
 
     local function push(text, is_last)
-        local cell_no = num_cells + 1
         table.insert(elements, { Foreground = { Color = text_fg } })
-        table.insert(elements, { Background = { Color = colors[cell_no] } })
         table.insert(elements, { Text = " " .. text .. " " })
-        if not is_last then
-            table.insert(elements, { Foreground = { Color = colors[cell_no + 1] } })
-        end
         num_cells = num_cells + 1
     end
 

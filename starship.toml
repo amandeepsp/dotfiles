@@ -11,6 +11,7 @@ $line_break\
 $character
 """
 add_newline = false
+command_timeout = 5000
 
 [character]
 success_symbol = '[➜](bold green)'
