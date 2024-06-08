@@ -1,14 +1,24 @@
 local wezterm = require("wezterm")
+local platform = require("utils.platform")
 local action = wezterm.action
+
+local theme = require("colors.kanagawa-dragon")
 
 local config = wezterm.config_builder()
 
--- `front_end` setinng can make font rendering
--- a little bit better on macOS
-config.front_end = "WebGpu"
-config.font_size = 13.0
+if platform.is_macos() then
+    -- `front_end` setinng can make font rendering
+    -- a little bit better on macOS
+    config.front_end = "WebGpu"
+    config.font_size = 13.0
+end
+
+if platform.is_linux() then
+    config.font_size = 11.0
+end
+
 config.scrollback_lines = 10000
-config.color_scheme = "kanagawabones"
+config.colors = theme
 
 config.window_padding = {
     left = 0,
@@ -28,31 +38,31 @@ config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
     { key = "phys:Space", mods = "LEADER", action = action.ActivateCommandPalette },
     -- Pane Keybindings
-    { key = "-", mods = "LEADER", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-    { key = "\\", mods = "LEADER", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    { key = "h", mods = "LEADER", action = action.ActivatePaneDirection("Left") },
-    { key = "j", mods = "LEADER", action = action.ActivatePaneDirection("Down") },
-    { key = "k", mods = "LEADER", action = action.ActivatePaneDirection("Up") },
-    { key = "l", mods = "LEADER", action = action.ActivatePaneDirection("Right") },
-    { key = "q", mods = "LEADER", action = action.CloseCurrentPane({ confirm = true }) },
-    { key = "z", mods = "LEADER", action = action.TogglePaneZoomState },
-    { key = "r", mods = "LEADER", action = action.ActivateKeyTable({ name = "resize_pane", one_shot = false }) },
+    { key = "-",          mods = "LEADER", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "\\",         mods = "LEADER", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = "h",          mods = "LEADER", action = action.ActivatePaneDirection("Left") },
+    { key = "j",          mods = "LEADER", action = action.ActivatePaneDirection("Down") },
+    { key = "k",          mods = "LEADER", action = action.ActivatePaneDirection("Up") },
+    { key = "l",          mods = "LEADER", action = action.ActivatePaneDirection("Right") },
+    { key = "q",          mods = "LEADER", action = action.CloseCurrentPane({ confirm = true }) },
+    { key = "z",          mods = "LEADER", action = action.TogglePaneZoomState },
+    { key = "r",          mods = "LEADER", action = action.ActivateKeyTable({ name = "resize_pane", one_shot = false }) },
     -- Tab Keybindings
-    { key = "t", mods = "LEADER", action = action.SpawnTab("CurrentPaneDomain") },
-    { key = "[", mods = "LEADER", action = action.ActivateTabRelative(-1) },
-    { key = "]", mods = "LEADER", action = action.ActivateTabRelative(1) },
-    { key = "n", mods = "LEADER", action = action.ShowTabNavigator },
-    { key = "Q", mods = "LEADER", action = action.CloseCurrentTab({ confirm = true }) },
+    { key = "t",          mods = "LEADER", action = action.SpawnTab("CurrentPaneDomain") },
+    { key = "[",          mods = "LEADER", action = action.ActivateTabRelative(-1) },
+    { key = "]",          mods = "LEADER", action = action.ActivateTabRelative(1) },
+    { key = "n",          mods = "LEADER", action = action.ShowTabNavigator },
+    { key = "Q",          mods = "LEADER", action = action.CloseCurrentTab({ confirm = true }) },
 }
 
 config.key_tables = {
     resize_pane = {
-        { key = "h", action = action.AdjustPaneSize({ "Left", 1 }) },
-        { key = "j", action = action.AdjustPaneSize({ "Down", 1 }) },
-        { key = "k", action = action.AdjustPaneSize({ "Up", 1 }) },
-        { key = "l", action = action.AdjustPaneSize({ "Right", 1 }) },
+        { key = "h",      action = action.AdjustPaneSize({ "Left", 1 }) },
+        { key = "j",      action = action.AdjustPaneSize({ "Down", 1 }) },
+        { key = "k",      action = action.AdjustPaneSize({ "Up", 1 }) },
+        { key = "l",      action = action.AdjustPaneSize({ "Right", 1 }) },
         { key = "Escape", action = "PopKeyTable" },
-        { key = "Enter", action = "PopKeyTable" },
+        { key = "Enter",  action = "PopKeyTable" },
     },
 }
 
@@ -75,7 +85,7 @@ wezterm.on("update-right-status", function(window, pane)
     local elements = {}
     local num_cells = 0
 
-    local function push(text, is_last)
+    local function push(text)
         table.insert(elements, { Foreground = { Color = text_fg } })
         table.insert(elements, { Text = " " .. text .. " " })
         num_cells = num_cells + 1
@@ -83,7 +93,7 @@ wezterm.on("update-right-status", function(window, pane)
 
     while #cells > 0 do
         local cell = table.remove(cells, 1)
-        push(cell, #cells == 0)
+        push(cell)
     end
 
     window:set_right_status(wezterm.format(elements))

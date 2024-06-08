@@ -63,6 +63,8 @@ local function on_lsp_attach(client, bufnr)
     end
 end
 
+local nproc = string.gsub(vim.fn.system('nproc'), "\n", "")
+
 return {
     {
         "neovim/nvim-lspconfig",
@@ -88,7 +90,7 @@ return {
             }
 
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "tsserver", "yamlls", "jsonls" },
+                ensure_installed = { "lua_ls", "pyright", "tsserver", "yamlls", "jsonls", "clangd" },
                 handlers = {
                     function(server_name)
                         lspconfig[server_name].setup(default_lsp_config)
@@ -106,12 +108,28 @@ return {
                                 yaml = {
                                     schemas = {
                                         kubernetes = "*.{yaml, yml}",
-                                        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = "*docker-compose*.{yml,yaml}",
+                                        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] =
+                                        "*docker-compose*.{yml,yaml}",
                                     },
                                 },
                             },
                         }))
                     end,
+                    ["clangd"] = function()
+                        lspconfig.clangd.setup(vim.tbl_deep_extend("force", default_lsp_config, {
+                            cmd = {
+                                "clangd",
+                                "--header-insertion=never",
+                                "--completion-style=detailed",
+                                "--function-arg-placeholders",
+                                "-j=" .. nproc,
+                                "--rename-file-limit=0",
+                                "--background-index",
+                                "--background-index-priority=normal",
+                            },
+                            filetypes = { "c", "cpp" }
+                        }))
+                    end
                 },
             })
         end,

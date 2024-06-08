@@ -13,8 +13,12 @@ return {
                         git_placement = "signcolumn",
                     },
                 },
+                git = {
+                    enable = true
+                },
                 filters = {
                     custom = { "^.git$" },
+                    git_ignored = true,
                 },
                 diagnostics = {
                     enable = true,
