@@ -63,7 +63,7 @@ local function on_lsp_attach(client, bufnr)
     end
 end
 
-local nproc = string.gsub(vim.fn.system('nproc'), "\n", "")
+local nproc = string.gsub(vim.fn.system("nproc"), "\n", "")
 
 return {
     {
@@ -90,7 +90,6 @@ return {
             }
 
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright", "tsserver", "yamlls", "jsonls", "clangd" },
                 handlers = {
                     function(server_name)
                         lspconfig[server_name].setup(default_lsp_config)
@@ -100,19 +99,6 @@ return {
                             before_init = function(_, config)
                                 config.settings.python.pythonPath = find_python()
                             end,
-                        }))
-                    end,
-                    ["yamlls"] = function()
-                        lspconfig.yamlls.setup(vim.tbl_deep_extend("force", default_lsp_config, {
-                            settings = {
-                                yaml = {
-                                    schemas = {
-                                        kubernetes = "*.{yaml, yml}",
-                                        ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] =
-                                        "*docker-compose*.{yml,yaml}",
-                                    },
-                                },
-                            },
                         }))
                     end,
                     ["clangd"] = function()
@@ -127,9 +113,9 @@ return {
                                 "--background-index",
                                 "--background-index-priority=normal",
                             },
-                            filetypes = { "c", "cpp" }
+                            filetypes = { "c", "cpp" },
                         }))
-                    end
+                    end,
                 },
             })
         end,

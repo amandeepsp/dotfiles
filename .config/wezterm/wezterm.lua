@@ -1,5 +1,5 @@
-local wezterm = require("wezterm")
 local platform = require("utils.platform")
+local wezterm = require("wezterm")
 local action = wezterm.action
 
 local theme = require("colors.kanagawa-dragon")
@@ -38,31 +38,35 @@ config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2000 }
 config.keys = {
     { key = "phys:Space", mods = "LEADER", action = action.ActivateCommandPalette },
     -- Pane Keybindings
-    { key = "-",          mods = "LEADER", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-    { key = "\\",         mods = "LEADER", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-    { key = "h",          mods = "LEADER", action = action.ActivatePaneDirection("Left") },
-    { key = "j",          mods = "LEADER", action = action.ActivatePaneDirection("Down") },
-    { key = "k",          mods = "LEADER", action = action.ActivatePaneDirection("Up") },
-    { key = "l",          mods = "LEADER", action = action.ActivatePaneDirection("Right") },
-    { key = "q",          mods = "LEADER", action = action.CloseCurrentPane({ confirm = true }) },
-    { key = "z",          mods = "LEADER", action = action.TogglePaneZoomState },
-    { key = "r",          mods = "LEADER", action = action.ActivateKeyTable({ name = "resize_pane", one_shot = false }) },
+    { key = "-", mods = "LEADER", action = action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+    { key = "\\", mods = "LEADER", action = action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+    { key = "h", mods = "LEADER", action = action.ActivatePaneDirection("Left") },
+    { key = "j", mods = "LEADER", action = action.ActivatePaneDirection("Down") },
+    { key = "k", mods = "LEADER", action = action.ActivatePaneDirection("Up") },
+    { key = "l", mods = "LEADER", action = action.ActivatePaneDirection("Right") },
+    { key = "q", mods = "LEADER", action = action.CloseCurrentPane({ confirm = true }) },
+    { key = "z", mods = "LEADER", action = action.TogglePaneZoomState },
+    {
+        key = "r",
+        mods = "LEADER",
+        action = action.ActivateKeyTable({ name = "resize_pane", one_shot = false }),
+    },
     -- Tab Keybindings
-    { key = "t",          mods = "LEADER", action = action.SpawnTab("CurrentPaneDomain") },
-    { key = "[",          mods = "LEADER", action = action.ActivateTabRelative(-1) },
-    { key = "]",          mods = "LEADER", action = action.ActivateTabRelative(1) },
-    { key = "n",          mods = "LEADER", action = action.ShowTabNavigator },
-    { key = "Q",          mods = "LEADER", action = action.CloseCurrentTab({ confirm = true }) },
+    { key = "t", mods = "LEADER", action = action.SpawnTab("CurrentPaneDomain") },
+    { key = "[", mods = "LEADER", action = action.ActivateTabRelative(-1) },
+    { key = "]", mods = "LEADER", action = action.ActivateTabRelative(1) },
+    { key = "n", mods = "LEADER", action = action.ShowTabNavigator },
+    { key = "Q", mods = "LEADER", action = action.CloseCurrentTab({ confirm = true }) },
 }
 
 config.key_tables = {
     resize_pane = {
-        { key = "h",      action = action.AdjustPaneSize({ "Left", 1 }) },
-        { key = "j",      action = action.AdjustPaneSize({ "Down", 1 }) },
-        { key = "k",      action = action.AdjustPaneSize({ "Up", 1 }) },
-        { key = "l",      action = action.AdjustPaneSize({ "Right", 1 }) },
+        { key = "h", action = action.AdjustPaneSize({ "Left", 1 }) },
+        { key = "j", action = action.AdjustPaneSize({ "Down", 1 }) },
+        { key = "k", action = action.AdjustPaneSize({ "Up", 1 }) },
+        { key = "l", action = action.AdjustPaneSize({ "Right", 1 }) },
         { key = "Escape", action = "PopKeyTable" },
-        { key = "Enter",  action = "PopKeyTable" },
+        { key = "Enter", action = "PopKeyTable" },
     },
 }
 

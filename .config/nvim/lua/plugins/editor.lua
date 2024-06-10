@@ -71,7 +71,7 @@ return {
             hooks.register(hooks.type.WHITESPACE, builtin.hide_first_tab_indent_level)
 
             require("ibl").setup({
-                indent = { char = "▏" },
+                indent = { char = "┊" },
                 scope = {
                     enabled = true,
                 },
