@@ -11,14 +11,14 @@ local -a plugins=(
 	marlonrichert/zsh-autocomplete    # Real-time type-ahead completion
 	marlonrichert/zsh-edit            # Better keyboard shortcuts
 	marlonrichert/zcolors             # Colors for completions and Git
-	qoomon/zsh-lazyload			      # Load scripts on demand
+	qoomon/zsh-lazyload               # Load scripts on demand
 )
 
 # The Zsh Autocomplete plugin sends *a lot* of characters to your terminal.
 # This is fine locally on modern machines, but if you're working through a slow
 # ssh connection, you might want to add a slight delay before the
 # autocompletion kicks in:
-#   zstyle ':autocomplete:*' min-delay 0.5  # seconds
+zstyle ':autocomplete:*' min-delay 0.5  # seconds
 #
 # If your connection is VERY slow, then you might want to disable
 # autocompletion completely and use only tab completion instead:
