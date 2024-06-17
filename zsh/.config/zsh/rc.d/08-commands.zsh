@@ -55,6 +55,12 @@ if [[ $(uname) == "Darwin" ]]; then
 	test -e "${ZDOTDIR}/.iterm2_shell_integration.zsh" && source "${ZDOTDIR}/.iterm2_shell_integration.zsh"
 fi
 
-alias ls='exa'
+if [ -x "$(command -v exa)" ]; then
+	alias ls='exa'
+fi
 alias ll='ls -alh'
-alias vim='nvim'
+
+if [ -x "$(command -v nvim)" ]; then
+	alias vim='nvim'
+fi
+
