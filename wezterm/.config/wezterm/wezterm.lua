@@ -17,6 +17,8 @@ if platform.is_linux() then
     config.font_size = 11.0
 end
 
+config.font = wezterm.font "SFMono Nerd Font"
+
 config.scrollback_lines = 10000
 config.colors = theme
 
