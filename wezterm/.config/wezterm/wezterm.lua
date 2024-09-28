@@ -1,4 +1,6 @@
+local appearance = require("utils.appearance")
 local platform = require("utils.platform")
+local projects = require("utils.projects")
 local wezterm = require("wezterm")
 local action = wezterm.action
 
@@ -11,16 +13,19 @@ if platform.is_macos() then
     -- a little bit better on macOS
     config.front_end = "WebGpu"
     config.font_size = 13.0
+    config.window_background_opacity = 0.95
+    config.macos_window_background_blur = 30
 end
 
 if platform.is_linux() then
     config.font_size = 11.0
 end
 
-config.font = wezterm.font "SFMono Nerd Font"
+config.font = wezterm.font("SFMono Nerd Font")
 
 config.scrollback_lines = 10000
-config.colors = theme
+--config.colors = theme
+config.color_scheme = "rose-pine"
 
 config.window_padding = {
     left = 0,
@@ -59,6 +64,20 @@ config.keys = {
     { key = "]", mods = "LEADER", action = action.ActivateTabRelative(1) },
     { key = "n", mods = "LEADER", action = action.ShowTabNavigator },
     { key = "Q", mods = "LEADER", action = action.CloseCurrentTab({ confirm = true }) },
+    {
+        key = "n",
+        mods = "LEADER",
+        action = action.PromptInputLine({
+            description = "Enter new tab name",
+            action = wezterm.action_callback(function(window, pane, line)
+                if line then
+                    window:active_tab():set_title(line)
+                end
+            end),
+        }),
+    },
+    { key = "p", mods = "LEADER", action = projects.choose_project() },
+    { key = "f", mods = "LEADER", action = action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }) },
 }
 
 config.key_tables = {

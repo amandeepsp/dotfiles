@@ -42,9 +42,7 @@ local function on_lsp_attach(client, bufnr)
         nmap("K", vim.lsp.buf.hover, "Hover Documentation")
     end
 
-    if capabilities.codeActionProvider then
-        nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-    end
+    nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
     if capabilities.renameProvider then
         nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
@@ -99,6 +97,7 @@ return {
                             before_init = function(_, config)
                                 config.settings.python.pythonPath = find_python()
                             end,
+                            on_attach = on_lsp_attach,
                         }))
                     end,
                     ["clangd"] = function()
