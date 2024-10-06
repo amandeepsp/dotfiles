@@ -21,7 +21,7 @@ local function setup_completion()
             ["<C-Space>"] = cmp.mapping.complete({}),
             ["<CR>"] = cmp.mapping.confirm({
                 behavior = cmp.ConfirmBehavior.Replace,
-                select = true,
+                select = false,
             }),
             ["<C-e>"] = cmp.mapping.abort(),
             ["<Tab>"] = cmp.mapping(function(fallback)

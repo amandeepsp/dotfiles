@@ -1,4 +1,3 @@
-local appearance = require("utils.appearance")
 local platform = require("utils.platform")
 local projects = require("utils.projects")
 local wezterm = require("wezterm")
@@ -24,8 +23,7 @@ end
 config.font = wezterm.font("SFMono Nerd Font")
 
 config.scrollback_lines = 10000
---config.colors = theme
-config.color_scheme = "rose-pine"
+config.colors = theme
 
 config.window_padding = {
     left = 0,

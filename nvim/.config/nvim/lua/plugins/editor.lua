@@ -4,10 +4,11 @@ return {
         "echasnovski/mini.pairs",
         event = "VeryLazy",
         opts = {
-            mappings = {
-                ["'"] = false,
-                ['"'] = false,
-            },
+            modes = { insert = "", command = true, terminal = false },
+            skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
+            skip_ts = { "string" },
+            skip_unbalanced = true,
+            markdown = true,
         },
         config = function(opts)
             require("mini.pairs").setup(opts)
@@ -36,14 +37,18 @@ return {
             require("trouble").setup()
         end,
         keys = {
-            { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "[D]ocument Diagnostics (Trouble)" },
+            {
+                "<leader>xd",
+                "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+                desc = "[D]ocument Diagnostics (Trouble)",
+            },
             {
                 "<leader>xw",
-                "<cmd>TroubleToggle workspace_diagnostics<cr>",
+                "<cmd>Trouble diagnostics toggle<cr>",
                 desc = "[W]orkspace Diagnostics (Trouble)",
             },
-            { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "[L]ocation List (Trouble)" },
-            { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "[Q]uickfix List (Trouble)" },
+            { "<leader>xl", "<cmd>Trouble loclist toggle<cr>", desc = "[L]ocation List (Trouble)" },
+            { "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "[Q]uickfix List (Trouble)" },
         },
     },
     {

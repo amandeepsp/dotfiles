@@ -1,0 +1,19 @@
+#!/bin/zsh
+PS1="%(?:%{$fg_bold[green]%}%1{➜%} :%{$fg_bold[red]%}%1{➜%} ) %{$fg[cyan]%}%c%{$reset_color%} "
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd prompt_robbyrussell_precmd
+
+PS2=              # Empty the left side, to make it easier to copy code from our terminal.
+RPS2="%F{11}%^%f" # %^ shows which shell constructs are still open.
+##
+# Options
+#
+# Auto-remove the right side of each prompt when you press enter. This way,
+# we'll have less clutter on screen. This also makes it easier to copy code from
+# our terminal.
+setopt TRANSIENT_RPROMPT
+# If we're not on an SSH connection, then remove the outer margin of the right
+# side of the prompt.
+[[ -v SSH_CONNECTION ]] ||
+	ZLE_RPROMPT_INDENT=0
