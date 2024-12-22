@@ -12,6 +12,7 @@ return {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 yaml = { "yamlfix" },
+                go = { "gofmt", "goimports" },
             },
             format_on_save = {
                 timeout_ms = 500,

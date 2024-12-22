@@ -10,8 +10,9 @@ local function setup_completion()
                 luasnip.lsp_expand(args.body)
             end,
         },
+        preselect = cmp.PreselectMode.None,
         completion = {
-            completeopt = "menu,menuone,noinsert",
+            --completeopt = "menu,menuone,noinsert,noselect",
         },
         mapping = cmp.mapping.preset.insert({
             ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -20,7 +21,6 @@ local function setup_completion()
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
             ["<C-Space>"] = cmp.mapping.complete({}),
             ["<CR>"] = cmp.mapping.confirm({
-                behavior = cmp.ConfirmBehavior.Replace,
                 select = false,
             }),
             ["<C-e>"] = cmp.mapping.abort(),

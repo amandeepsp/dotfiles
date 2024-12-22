@@ -35,7 +35,6 @@ config.window_padding = {
 config.use_fancy_tab_bar = false
 config.inactive_pane_hsb = {
     saturation = 0.9,
-    brightness = 0.5,
 }
 
 -- Keys

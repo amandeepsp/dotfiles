@@ -1,0 +1,5 @@
+theme = Afterglow
+shell-integration = zsh
+
+font-thicken = true
+
