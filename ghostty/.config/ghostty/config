@@ -7,10 +7,8 @@ shell-integration = zsh
 font-family = "Iosevka Term Extended"
 font-size = 14
 font-thicken = true
+font-feature = -calt, -liga, -dlig
 bold-is-bright = true
-
-background-opacity = 0.96
-background-blur-radius = 40
 
 macos-option-as-alt = left
 
@@ -26,3 +24,4 @@ keybind = ctrl+a>k=goto_split:top
 keybind = ctrl+a>q=close_surface
 
 keybind = ctrl+shift+i=inspector:toggle
+keybind = unconsumed:ctrl+a>r=reload_config
