@@ -16,6 +16,9 @@ return {
                 -- copilot-cmp with handle these
                 suggestions = { enabled = false },
                 panel = { enabled = false },
+                filetypes = {
+                    zig = false,
+                },
             })
         end,
     },

@@ -61,8 +61,6 @@ local function on_lsp_attach(client, bufnr)
     end
 end
 
-local nproc = string.gsub(vim.fn.system("nproc"), "\n", "")
-
 return {
     {
         "neovim/nvim-lspconfig",
@@ -107,7 +105,7 @@ return {
                                 "--header-insertion=never",
                                 "--completion-style=detailed",
                                 "--function-arg-placeholders",
-                                "-j=" .. nproc,
+                                "-j=4",
                                 "--rename-file-limit=0",
                                 "--background-index",
                                 "--background-index-priority=normal",

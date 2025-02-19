@@ -5,12 +5,5 @@ return {
         dependencies = {
             { "echasnovski/mini.icons", opts = {} },
         },
-        setup = function()
-            require("oil").setup({
-                view_options = {
-                    show_hidden = true,
-                },
-            })
-        end,
     },
 }

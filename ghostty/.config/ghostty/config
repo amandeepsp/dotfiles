@@ -1,5 +1,28 @@
+# full docs: ghostty +show-config --default --docs
+
+# available themes: ghostty +list-themes
 theme = Afterglow
 shell-integration = zsh
 
+font-family = "Iosevka Term Extended"
+font-size = 14
 font-thicken = true
+bold-is-bright = true
 
+background-opacity = 0.96
+background-blur-radius = 40
+
+macos-option-as-alt = left
+
+#keymaps
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+keybind = ctrl+a>n=new_tab
+keybind = ctrl+a>\=new_split:right
+keybind = ctrl+a>-=new_split:down
+keybind = ctrl+a>h=goto_split:left
+keybind = ctrl+a>l=goto_split:right
+keybind = ctrl+a>j=goto_split:bottom
+keybind = ctrl+a>k=goto_split:top
+keybind = ctrl+a>q=close_surface
+
+keybind = ctrl+shift+i=inspector:toggle
