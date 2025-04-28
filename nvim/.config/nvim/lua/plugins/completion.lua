@@ -49,8 +49,7 @@ local function setup_completion()
             { name = "path" },
             { name = "buffer" },
             { name = "nvim_lsp_signature_help" },
-            { name = "copilot" },
-        },
+        }
     })
 end
 
@@ -65,12 +64,6 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-nvim-lsp-signature-help",
-            {
-                "zbirenbaum/copilot-cmp",
-                config = function()
-                    require("copilot_cmp").setup()
-                end,
-            },
         },
         config = setup_completion,
     },
