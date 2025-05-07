@@ -25,14 +25,11 @@ function M.choose_project()
         table.insert(choices, { label = value })
     end
 
-    print(choices)
-
     return wezterm.action.InputSelector({
         title = "Choose a project",
         choices = choices,
         fuzzy = true,
         action = wezterm.action_callback(function(child_window, child_pane, id, label)
-            print(label)
             if not label then
                 return
             end

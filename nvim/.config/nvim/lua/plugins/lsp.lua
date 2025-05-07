@@ -1,36 +1,33 @@
-local function find_python()
-    local path = require("lspconfig.util").path
-
-    -- Use active virtualenv if available
-    if vim.env.VIRTUAL_ENV then
-        return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
-    end
-
-    -- Use default system python
-    return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
-end
-
-local function on_lsp_attach(client, bufnr)
+local function on_lsp_attach(event)
     local nmap = function(keys, func, desc)
         if desc then
             desc = "LSP: " .. desc
         end
 
-        vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+        vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
+    end
+
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if not client then
+        return
     end
 
     local telescope_builtin = require("telescope.builtin")
     local capabilities = client.server_capabilities
+
+    if not capabilities then
+        return
+    end
 
     if capabilities.definitionProvider then
         nmap("gd", telescope_builtin.lsp_definitions, "[G]oto [D]efinition")
     end
 
     if capabilities.declarationProvider then
-        nmap("gD", telescope_builtin.lsp_declarations, "[G]oto [D]eclaration")
+        nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
     end
 
-    if capabilities.imeplementationProvider then
+    if capabilities.implementationProvider then
         nmap("gI", telescope_builtin.lsp_implementations, "[G]oto [I]mplementation")
     end
 
@@ -49,7 +46,7 @@ local function on_lsp_attach(client, bufnr)
     end
 
     if capabilities.typeDefinitionProvider then
-        nmap("<leader>D", telescope_builtin.lsp_type_definitions, "Type [D]efinition")
+        nmap("gt", telescope_builtin.lsp_type_definitions, "[T]ype Definition")
     end
 
     if capabilities.documentSymbolProvider then
@@ -59,6 +56,12 @@ local function on_lsp_attach(client, bufnr)
     if capabilities.workspaceSymbolProvider then
         nmap("<leader>ws", telescope_builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
     end
+
+    if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
+        nmap("<leader>th", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+        end, "[T]oggle Inlay [h]ints")
+    end
 end
 
 return {
@@ -66,8 +69,8 @@ return {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
         dependencies = {
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            "mason-org/mason.nvim",
+            "mason-org/mason-lspconfig.nvim",
         },
         config = function()
             local lspconfig = require("lspconfig")
@@ -78,7 +81,6 @@ return {
 
             local default_lsp_config = {
                 capabilities = capabilities,
-                on_attach = on_lsp_attach,
                 flags = {
                     debounce_text_changes = 150,
                     allow_incremental_sync = true,
@@ -86,34 +88,17 @@ return {
             }
 
             require("mason-lspconfig").setup({
+                automatic_enable = true,
                 handlers = {
                     function(server_name)
                         lspconfig[server_name].setup(default_lsp_config)
                     end,
-                    ["pyright"] = function()
-                        lspconfig.pyright.setup(vim.tbl_deep_extend("force", default_lsp_config, {
-                            before_init = function(_, config)
-                                config.settings.python.pythonPath = find_python()
-                            end,
-                            on_attach = on_lsp_attach,
-                        }))
-                    end,
-                    ["clangd"] = function()
-                        lspconfig.clangd.setup(vim.tbl_deep_extend("force", default_lsp_config, {
-                            cmd = {
-                                "clangd",
-                                "--header-insertion=never",
-                                "--completion-style=detailed",
-                                "--function-arg-placeholders",
-                                "-j=4",
-                                "--rename-file-limit=0",
-                                "--background-index",
-                                "--background-index-priority=normal",
-                            },
-                            filetypes = { "c", "cpp" },
-                        }))
-                    end,
                 },
+            })
+
+            vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("nvim-lsp-attach", { clear = true }),
+                callback = on_lsp_attach,
             })
         end,
     },

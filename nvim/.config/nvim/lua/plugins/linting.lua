@@ -5,17 +5,6 @@ local linters_by_filetypes = {
     yaml = { "yamllint" },
 }
 
-local function debounce(ms, fn)
-    local timer = vim.uv.new_timer()
-    return function(...)
-        local argv = { ... }
-        timer:start(ms, 0, function()
-            timer:stop()
-            vim.schedule_wrap(fn)(unpack(argv))
-        end)
-    end
-end
-
 local function try_lint()
     local nvim_lint = require("lint")
     local names = nvim_lint._resolve_linter_by_ft(vim.bo.filetype)
@@ -61,9 +50,7 @@ return {
 
         vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
             group = vim.api.nvim_create_augroup("linting", { clear = true }),
-            callback = debounce(100, function()
-                try_lint()
-            end),
+            callback = try_lint,
         })
     end,
 }

@@ -1,13 +1,22 @@
 return {
     {
-        "nvim-lualine/lualine.nvim",
+        "echasnovski/mini.statusline",
+        version = "*",
         dependencies = {
             "echasnovski/mini.icons",
         },
         config = function()
-            require("lualine").setup({
-                options = { section_separators = "", component_separators = "|" },
-            })
+            require("mini.statusline").setup()
+        end,
+    },
+    {
+        "echasnovski/mini.tabline",
+        version = "*",
+        dependencies = {
+            "echasnovski/mini.icons",
+        },
+        config = function()
+            require("mini.tabline").setup()
         end,
     },
     {

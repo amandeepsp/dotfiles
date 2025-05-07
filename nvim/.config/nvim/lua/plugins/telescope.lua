@@ -50,6 +50,7 @@ return {
             enabled = vim.fn.executable("make") == 1,
         },
         "debugloop/telescope-undo.nvim",
+        "nvim-telescope/telescope-ui-select.nvim",
     },
     config = function()
         local telescope = require("telescope")
@@ -67,11 +68,17 @@ return {
             defaults = {
                 file_ignore_patterns = { "node%_modules", "%.git" },
             },
+            extensions = {
+                ["ui-select"] = {
+                    require("telescope.themes").get_dropdown(),
+                },
+            },
         })
 
         local telescope_builtins = require("telescope.builtin")
 
         telescope.load_extension("fzf")
+        telescope.load_extension("ui-select")
 
         vim.keymap.set("n", "<leader>?", telescope_builtins.oldfiles, { desc = "[?] Find recently opened files" })
         vim.keymap.set("n", "<leader><space>", telescope_builtins.buffers, { desc = "[ ] Find existing buffers" })

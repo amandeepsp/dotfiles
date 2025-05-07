@@ -37,3 +37,7 @@ if command -v brew > /dev/null; then
       $HOMEBREW_PREFIX/share/zsh/site-functions
   )
 fi
+
+if [ -x "$(command -v nvim)" ]; then
+	export MANPAGER='nvim +Man!'
+fi
