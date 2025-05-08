@@ -79,6 +79,7 @@ return {
 
         telescope.load_extension("fzf")
         telescope.load_extension("ui-select")
+        telescope.load_extension("undo")
 
         vim.keymap.set("n", "<leader>?", telescope_builtins.oldfiles, { desc = "[?] Find recently opened files" })
         vim.keymap.set("n", "<leader><space>", telescope_builtins.buffers, { desc = "[ ] Find existing buffers" })
@@ -105,7 +106,6 @@ return {
         vim.keymap.set("n", "<leader>sc", telescope_builtins.command_history, { desc = "[S]earch [c]ommand history" })
         vim.keymap.set("n", "<leader>sC", telescope_builtins.commands, { desc = "[S]earch [C]ommands" })
 
-        telescope.load_extension("undo")
         vim.keymap.set("n", "<leader>u", telescope.extensions.undo.undo, { desc = "Search [U]ndo tree" })
     end,
 }

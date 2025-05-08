@@ -26,24 +26,24 @@ local function try_lint()
         return linter and not (type(linter) == "table" and linter.condition and not linter.condition(ctx))
     end, names)
 
+    local fidget = require("fidget")
     -- Run linters.
     if #names > 0 then
         nvim_lint.try_lint(names)
-    end
+        local linters = nvim_lint.get_running()
 
-    local fidget = require("fidget")
-
-    local linters = nvim_lint.get_running()
-    if #linters == 0 then
-        fidget.notify("󰦕 Done Linitng", vim.log.levels.INFO, { title = "Linting" })
-    else
-        fidget.notify("Linting in progress", vim.log.levels.INFO, { title = "Linting" })
+        -- run notify only when linters are present
+        if #linters == 0 then
+            fidget.notify("✔ Linting completed", vim.log.levels.INFO, { title = "Linting" })
+        else
+            fidget.notify("Linting using " .. table.concat(linters, ", "), vim.log.levels.INFO, { title = "Linting" })
+        end
     end
 end
 
 return {
     "mfussenegger/nvim-lint",
-    event = "VeryLazy",
+    event = { "BufReadPre", "BufNewFile" },
     config = function()
         local linter = require("lint")
         linter.linters_by_ft = linters_by_filetypes
