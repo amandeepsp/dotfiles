@@ -76,22 +76,11 @@ return {
             local lspconfig = require("lspconfig")
             require("mason").setup()
 
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-            local default_lsp_config = {
-                capabilities = capabilities,
-                flags = {
-                    debounce_text_changes = 150,
-                    allow_incremental_sync = true,
-                },
-            }
-
             require("mason-lspconfig").setup({
                 automatic_enable = true,
                 handlers = {
                     function(server_name)
-                        lspconfig[server_name].setup(default_lsp_config)
+                        lspconfig[server_name].setup()
                     end,
                 },
             })
