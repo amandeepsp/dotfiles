@@ -5,9 +5,7 @@ return {
         dependencies = {
             "echasnovski/mini.icons",
         },
-        config = function()
-            require("mini.statusline").setup()
-        end,
+        opts = {},
     },
     {
         "echasnovski/mini.tabline",
@@ -15,14 +13,10 @@ return {
         dependencies = {
             "echasnovski/mini.icons",
         },
-        config = function()
-            require("mini.tabline").setup()
-        end,
+        opts = {},
     },
     {
         "j-hui/fidget.nvim",
-        config = function()
-            require("fidget").setup()
-        end,
+        opts = {},
     },
 }

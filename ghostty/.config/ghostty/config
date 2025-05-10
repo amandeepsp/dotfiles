@@ -5,12 +5,16 @@ theme = Afterglow
 shell-integration = zsh
 
 font-family = "Iosevka Term Extended"
-font-size = 14
+font-size = 12
 font-thicken = true
 font-feature = -calt, -liga, -dlig
 bold-is-bright = true
+selection-invert-fg-bg = true
 
+# macOS specific options
 macos-option-as-alt = left
+macos-icon = xray
+
 
 #keymaps
 keybind = global:cmd+grave_accent=toggle_quick_terminal
@@ -22,6 +26,13 @@ keybind = ctrl+a>l=goto_split:right
 keybind = ctrl+a>j=goto_split:bottom
 keybind = ctrl+a>k=goto_split:top
 keybind = ctrl+a>q=close_surface
+keybind = ctrl+a>z=toggle_split_zoom
+keybind = ctrl+a>[=previous_tab
+keybind = ctrl+a>]=next_tab
+keybind = ctrl+a>t=new_tab
+keybind = ctrl+a>Q=close_tab
+
+
 
 keybind = ctrl+shift+i=inspector:toggle
 keybind = unconsumed:ctrl+a>r=reload_config

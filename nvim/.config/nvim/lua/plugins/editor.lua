@@ -3,39 +3,23 @@ return {
     {
         "echasnovski/mini.pairs",
         event = "VeryLazy",
-        opts = {
-            modes = { insert = "", command = true, terminal = false },
-            skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
-            skip_ts = { "string" },
-            skip_unbalanced = true,
-            markdown = true,
-        },
-        config = function(opts)
-            require("mini.pairs").setup(opts)
-        end,
+        opts = {},
     },
     {
         "echasnovski/mini.surround",
         event = "VeryLazy",
-        config = function()
-            require("mini.surround").setup()
-        end,
+        opts = {},
     },
     {
         "echasnovski/mini.comment",
         event = "VeryLazy",
-        config = function()
-            require("mini.comment").setup()
-        end,
+        opts = {},
     },
     {
         "folke/trouble.nvim",
         cmd = { "TroubleToggle", "Trouble" },
         dependencies = { "nvim-tree/nvim-web-devicons" },
         opts = { use_diagnostics_signs = true },
-        config = function()
-            require("trouble").setup()
-        end,
         keys = {
             {
                 "<leader>xd",
@@ -61,9 +45,7 @@ return {
         -- WARNING: test done
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-        config = function()
-            require("todo-comments").setup()
-        end,
+        opts = {},
     },
     {
         "lukas-reineke/indent-blankline.nvim",

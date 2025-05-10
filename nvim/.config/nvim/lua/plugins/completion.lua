@@ -1,5 +1,15 @@
 return {
     {
+        "L3MON4D3/LuaSnip",
+        version = "2.*",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        build = vim.fn.has("win32") ~= 0 and "make install_jsregexp" or nil,
+        config = function()
+            require("luasnip").setup()
+            require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+    },
+    {
         "saghen/blink.cmp",
         event = "InsertEnter",
         dependencies = { "L3MON4D3/LuaSnip", version = "2.*" },
