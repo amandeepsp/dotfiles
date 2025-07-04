@@ -19,4 +19,15 @@ return {
         "j-hui/fidget.nvim",
         opts = {},
     },
+    {
+        "folke/zen-mode.nvim",
+        opts = {
+            window = {
+                options = {
+                    number = false,
+                    relativenumber = false,
+                },
+            },
+        },
+    },
 }

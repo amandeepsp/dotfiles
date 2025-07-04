@@ -1,20 +1,43 @@
 # full docs: ghostty +show-config --default --docs
 
 # available themes: ghostty +list-themes
-theme = Afterglow
 shell-integration = zsh
 
 font-family = "Iosevka Term Extended"
-font-size = 12
+font-size = 13
 font-thicken = true
 font-feature = -calt, -liga, -dlig
 bold-is-bright = true
 selection-invert-fg-bg = true
 
-# macOS specific options
+# macOS specific option:
 macos-option-as-alt = left
 macos-icon = xray
 
+# theme - kanagawa-dragon
+# see: https://github.com/rebelot/kanagawa.nvim/blob/master/extras/ghostty/kanagawa-dragon
+palette = 0=#0d0c0c
+palette = 1=#c4746e
+palette = 2=#8a9a7b
+palette = 3=#c4b28a
+palette = 4=#8ba4b0
+palette = 5=#a292a3
+palette = 6=#8ea4a2
+palette = 7=#c8c093
+palette = 8=#a6a69c
+palette = 9=#e46876
+palette = 10=#87a987
+palette = 11=#e6c384
+palette = 12=#7fb4ca
+palette = 13=#938aa9
+palette = 14=#7aa89f
+palette = 15=#c5c9c5
+
+background = 181616
+foreground = c5c9c5
+cursor-color = c8c093
+selection-background = 2d4f67
+selection-foreground = c8c093
 
 #keymaps
 keybind = global:cmd+grave_accent=toggle_quick_terminal
@@ -31,8 +54,6 @@ keybind = ctrl+a>[=previous_tab
 keybind = ctrl+a>]=next_tab
 keybind = ctrl+a>t=new_tab
 keybind = ctrl+a>Q=close_tab
-
-
 
 keybind = ctrl+shift+i=inspector:toggle
 keybind = unconsumed:ctrl+a>r=reload_config
